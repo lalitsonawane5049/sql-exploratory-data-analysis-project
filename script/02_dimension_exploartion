@@ -1,0 +1,5 @@
+--Expplore All countries our customers come from
+select distinct country from gold.dim_customers
+
+--Explore All categories 'The major Division'
+Select Distinct category, sub_category,product_name from gold.dim_products
