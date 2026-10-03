@@ -1,0 +1,19 @@
+--Find the date of the first and last order.
+--How many years of sales are available
+Select min(order_date) as first_order,
+	max(order_date) as last_order,
+	DATEDIFF(year,min(order_date),max(order_date)) AS order_range_years,
+	DATEDIFF(month,min(order_date),max(order_date)) AS order_range_month,
+	DATEDIFF(day,min(order_date),max(order_date)) AS order_range_day,
+	DATEDIFF(hour,min(order_date),max(order_date)) AS order_range_hours,
+	DATEDIFF(MINUTE,min(order_date),max(order_date)) AS order_range_minutes,
+	DATEDIFF(second,min(order_date),max(order_date)) AS order_range_seconds
+from gold.fact_sales;
+
+--Find the youngest and the oldest customer
+Select 
+MIN(birthdate) as oldest_birthdate,
+DATEDIFF(year,MIN(birthdate),GETDATE()) as oldest_person_age,
+MAX(birthdate) as youngest_birthdate,
+DATEDIFF(year,MAX(birthdate),GETDATE()) as youngest_person_age
+from gold.dim_customers
