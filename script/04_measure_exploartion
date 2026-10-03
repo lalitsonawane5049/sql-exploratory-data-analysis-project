@@ -1,0 +1,31 @@
+--find the total Sales
+Select sum(sales_amount) from gold.fact_sales;
+--find how many items are sold
+Select sum(quantity) from gold.fact_sales;
+--find the average selling price
+select avg(price) from gold.fact_sales;
+
+--Find the total number of orders
+select count(order_number) from gold.fact_sales;
+select count(DISTINCT order_number) from gold.fact_sales;
+--find the total number of products
+select count(DISTINCT product_name) as total_products from gold.dim_products
+ --find the total number of customers
+ select count(customer_key) as totl_customers from gold.dim_customers;
+--find  the total number of customers that has placed an order.
+ select count(DISTINCT customer_key) as totl_customers from gold.fact_sales;
+
+--Generate a Report that shows all key metrics of the business.
+Select 'Total Sales' as measure_name , SUM(sales_amount) as measure_value from gold.fact_sales
+UNION ALL
+Select 'Total Quantity' as measure_name,sum(quantity) from gold.fact_sales
+UNION ALL
+select 'Average Price' as measure_name,avg(price) from gold.fact_sales
+UNION ALL
+select 'Total Nr. Orders' as measure_name,count(DISTINCT order_number) from gold.fact_sales
+UNION ALL
+select 'Total Nr. Products' as measure_name,count(DISTINCT product_name) as total_products from gold.dim_products
+UNION ALL
+select 'Total Nr. Customers' ,count(customer_key) as totl_customers from gold.dim_customers
+UNION ALL
+select 'Total Nr. Customers who placed orders' , count(DISTINCT customer_key) as totl_customers from gold.fact_sales;
